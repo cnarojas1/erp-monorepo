@@ -1,0 +1,13 @@
+{
+  "name": "erp-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo ERP Desktop - Múltiples clientes",
+  "private": true,
+  "scripts": {
+    "init": "echo 'Monorepo initialized'",
+    "add-client": "node scripts/add-client.js",
+    "status": "git submodule status"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}
