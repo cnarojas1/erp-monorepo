@@ -8,9 +8,10 @@ Monorepo para múltiples clientes ERP Desktop.
 erp-monorepo/
 ├── README.md              # Esta documentación
 ├── package.json           # Scripts comunes
+├── .gitmodules            # Submodules configuration
 ├── clients/
 │   ├── lipigas-anchaual/  # Submodule - Cliente Lipigas Ancahual
-│   └── [nuevo Cliente]/   # Submodule - Próximos clientes
+│   └── template/          # Submodule - Base de plantilla
 ├── docs/                  # Documentación compartida
 └── scripts/               # Scripts de build/actualización
 ```
@@ -34,16 +35,24 @@ npm install
 # 1. Crear nuevo repo en GitHub
 gh repo create nicolasrojas/erp-desktop-nuevo-cliente --public
 
-# 2. Agregar como submodule
-cd erp-monorepo
-git submodule add https://github.com/nicolasrojas/erp-desktop-nuevo-cliente.git clients/nuevo-cliente
+# 2. Copiar y personalizar desde template
+cp -r clients/template clients/nuevo-cliente
+cd clients/nuevo-cliente
 
-# 3. Commit
+# 3. Configurar el nuevo cliente
+# Editar package.json, tauri.conf.json, etc.
+
+# 4. Commit and push
+cd ../../../..  # Volver al monorepo
 git add clients/nuevo-cliente
 git commit -m "Add client: nuevo-cliente"
+git push
+```
 
-# 4. Subir
-git push && git push --tags
+### Usar el script automático:
+
+```bash
+node scripts/add-client.js nuevo-cliente
 ```
 
 ## 🔄 Actualizar Submodules
@@ -61,14 +70,18 @@ git submodule status
 | Cliente | Repo | Estado | Credenciales |
 |---------|------|--------|--------------|
 | Lipigas Ancahual | [Ver release](https://github.com/nicolasrojas/erp-desktop-lipigas-anchaual) | ✅ v1.0.0 | admin/admin123 |
-| Template | (pendiente) | - | - |
+| Template | [Ver repo](https://github.com/nicolasrojas/erp-template) | ✅ v1.0.0 | - |
 
 ## 🛠️ Desarrollo
 
 ```bash
+# Clonar con submodules
+git clone --recurse-submodules https://github.com/nicolasrojas/erp-monorepo.git
+
 # Acceder a un cliente
 cd clients/lipigas-anchaual
 npm install
+npm run db:init  # Crea usuario admin/admin123
 npm run dev
 ```
 
