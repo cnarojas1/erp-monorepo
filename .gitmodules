@@ -1,3 +1,6 @@
 [submodule "clients/lipigas-anchaual"]
 	path = clients/lipigas-anchaual
 	url = https://github.com/cnarojas1/erp-desktop-lipigas-anchaual.git
+[submodule "clients/template"]
+	path = clients/template
+	url = https://github.com/cnarojas1/erp-template.git
